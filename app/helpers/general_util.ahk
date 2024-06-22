@@ -7,7 +7,12 @@ IsColor(X, Y, Color, Variation := 0) {
     Return PixelGetColor(X, Y) == Color
 }
 
-RandSleep(Start, Stop) {
-    RandDelay := Random(Start, Stop)
+RandSleep(Start, Stop?) {
+    If (IsSet(Stop)) {
+        RandDelay := Random(Start, Stop)
+    } Else {
+        Offset := Start * 0.1
+        RandDelay := Random(Start - Offset, Start + Offset)
+    }
     Sleep RandDelay
 }

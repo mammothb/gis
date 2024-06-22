@@ -23,20 +23,20 @@ IsFishing() {
 IsFullScreenMenu() {
     Global
     Return (
-        IsColor(1859, 47, LightMenuColor)
-        or IsColor(1875, 35, LightMenuColor)
+        IsColor(1549, 39, LightMenuColor)
+        or IsColor(1562, 29, LightMenuColor)
     )
 }
 
 IsGameScreen() {
     ; Check for the eye icon next to the map
     Global
-    Return not IsFullScreenMenu() and IsColor(276, 60, WhiteColor)
+    Return not IsFullScreenMenu() and IsColor(230, 50, WhiteColor)
 }
 
 IsInBoat() {
     Global
-    Return IsColor(828, 976, LightMenuColor)
+    Return IsColor(690, 813, LightMenuColor)
 }
 
 SearchDialogue(&FoundX, &FoundY, DialogueType) {

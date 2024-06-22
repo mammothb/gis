@@ -40,6 +40,7 @@ class GisView extends Gui {
             ),
             "Features",
         )
+        this._AddFeature("AlternateVision", &Controller)
         this._AddFeature("SimpleAttack", &Controller)
         this._AddFeature("SimpleJump", &Controller)
         this._AddFeature("SkipDialogue", &Controller)

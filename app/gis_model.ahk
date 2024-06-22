@@ -3,15 +3,17 @@
 #Include "helpers\gis_config.ahk"
 
 ; Features
+#Include "features\alternate_vision.ahk"
 #Include "features\simple_attack.ahk"
 #Include "features\simple_jump.ahk"
 #Include "features\skip_dialogue.ahk"
 
 class GisModel {
     EnabledFeatures := [
+        "AlternateVision",
         "SimpleAttack",
         "SimpleJump",
-        "SkipDialogue"
+        "SkipDialogue",
     ]
     GuiTitle := "Genshin Impact Script"
     ShortTitle := "GIS"
