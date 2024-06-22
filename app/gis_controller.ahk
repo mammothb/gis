@@ -3,8 +3,8 @@
 class GisController {
     __New(&Model) {
         this.Model := Model
-        Hotkey "$Home", ObjBindMethod(this, "ReloadGis"), "On"
-        Hotkey "$End", ObjBindMethod(this, "CloseGis"), "On"
+        Hotkey "$F12", ObjBindMethod(this, "ReloadGis"), "On"
+        Hotkey "$Pause", ObjBindMethod(this, "CloseGis"), "On"
     }
 
     CloseGis(*) {
