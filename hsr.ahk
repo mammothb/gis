@@ -11,7 +11,16 @@ If (not A_IsAdmin) {
 }
 
 Global GameProcessName := "ahk_exe StarRail.exe"
-Global ColorIDs := Map("Normal", 0xFFFFFF, "Message", 0xF6F6F6, "Quest", 0xE6CF88)
+Global ColorIDs := Map("Normal", 0xFFFFFF, "Quest", 0xE6CF88)
+
+LockedClick(X, Y) {
+    Global
+    BlockInput "MouseMove"
+    Click X, Y, "Down"
+    Sleep ClickDelay
+    Click "Up"
+    BlockInput "MouseMoveOff"
+}
 
 RandSleep(Start, Stop?) {
     If (IsSet(Stop)) {
@@ -31,6 +40,35 @@ SearchDialogue(&FoundX, &FoundY, DialogueType) {
     Return PixelSearch(
         &FoundX, &FoundY, X, Y1, X, Y2, ColorIDs[DialogueType]
     )
+}
+
+SkipAndClick() {
+    Send "{Space}"
+    RandSleep(100)
+    Send "1"
+    ; If (SearchDialogue(&FoundX, &FoundY, "Quest")) {
+    ;     LockedClick(FoundX, FoundY)
+    ; } Else If (SearchDialogue(&FoundX, &FoundY, "Normal")) {
+    ;     LockedClick(FoundX, FoundY)
+    ; }
+}
+
+Hotkey "~*``", HoldSpace
+
+Global HoldingSpace := False
+
+HoldSpace(*) {
+    Global
+    If (not WinActive(GameProcessName)) {
+        Return
+    }
+    If (HoldingSpace) {
+        SendInput "{Space Up}"
+        HoldingSpace := False
+    } Else {
+        SendInput "{Space Down}"
+        HoldingSpace := True
+    }
 }
 
 Hotkey "~*Space",    PressSpace,   "On"
@@ -54,26 +92,6 @@ ReleaseSpace(*) {
     Global
     SetTimer SkipAndClick, 0
     PressingSpace := False
-}
-
-SkipAndClick() {
-    Send "{Space}"
-    If (SearchDialogue(&FoundX, &FoundY, "Quest")) {
-        LockedClick(FoundX, FoundY)
-    } Else If (SearchDialogue(&FoundX, &FoundY, "Message")) {
-        LockedClick(FoundX, FoundY)
-    } Else If (SearchDialogue(&FoundX, &FoundY, "Normal")) {
-        LockedClick(FoundX, FoundY)
-    }     RandSleep(0, 100)
-}
-
-LockedClick(X, Y) {
-    Global
-    BlockInput "MouseMove"
-    Click X, Y, "Down"
-    Sleep ClickDelay
-    Click "Up"
-    BlockInput "MouseMoveOff"
 }
 
 Hotkey "$F12", ReloadSelf, "On"
